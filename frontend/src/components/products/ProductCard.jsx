@@ -17,15 +17,12 @@ function ImagePlaceholder() {
 
 export default function ProductCard({ product }) {
   const hasPrice = product.price !== null && product.price !== undefined;
+  const image = product.images && product.images.length > 0 ? product.images[0] : null;
 
   return (
     <article className="product-card">
       <Link to={`/product/${product.slug}`} className="product-image">
-        {product.image ? (
-          <img src={product.image} alt={product.name} loading="lazy" />
-        ) : (
-          <ImagePlaceholder />
-        )}
+        {image ? <img src={image} alt={product.name} loading="lazy" /> : <ImagePlaceholder />}
       </Link>
       <div className="product-body">
         {product.brand && <span className="product-brand">{product.brand}</span>}

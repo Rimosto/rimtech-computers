@@ -1,0 +1,79 @@
+.shop-head {
+  margin-bottom: var(--space-3);
+}
+
+.shop-head h1 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  margin-bottom: 0.25rem;
+}
+
+.shop-count {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* Category chips: scroll sideways on phones, wrap on larger screens */
+.chips {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  margin-bottom: var(--space-3);
+  padding-bottom: 0.25rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.chips::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 700px) {
+  .chips {
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
+}
+
+.chip {
+  flex: 0 0 auto;
+  padding: 0.5rem 1rem;
+  background: var(--color-white);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+
+.chip:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.chip.active {
+  background: var(--color-black);
+  border-color: var(--color-black);
+  color: var(--color-white);
+}
+
+.shop-empty {
+  padding: var(--space-4) var(--space-3);
+  text-align: center;
+  background: var(--bg-alt);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+}
+
+.shop-empty h2 {
+  font-size: 1.25rem;
+}
+
+.shop-empty p {
+  max-width: 460px;
+  margin-inline: auto;
+  margin-bottom: var(--space-3);
+  color: var(--text-muted);
+}

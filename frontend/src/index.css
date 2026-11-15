@@ -334,15 +334,6 @@ button {
   padding-block: clamp(3.5rem, 10vw, 7rem);
 }
 
-.hero-inner {
-  max-width: 760px;
-  margin-inline: 0;
-}
-
-.hero-inner.container {
-  margin-inline: auto;
-}
-
 .eyebrow {
   display: inline-block;
   margin-bottom: var(--space-2);
@@ -356,6 +347,7 @@ button {
 }
 
 .hero h1 {
+  max-width: 760px;
   margin-bottom: var(--space-2);
 }
 

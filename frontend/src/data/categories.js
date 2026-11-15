@@ -1,5 +1,6 @@
 export const categories = [
   { slug: 'laptops', name: 'Laptops', blurb: 'For work, study and travel' },
+  { slug: 'phones', name: 'Phones', blurb: 'Smartphones from leading brands' },
   { slug: 'desktops', name: 'Desktop Computers', blurb: 'Reliable office and power desktops' },
   { slug: 'mini-pcs', name: 'Mini PCs', blurb: 'Compact computers that save space' },
   { slug: 'monitors', name: 'Monitors', blurb: 'Clear displays for every desk' },

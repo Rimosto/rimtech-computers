@@ -1,0 +1,76 @@
+:root {
+  /* Brand colours */
+  --color-black: #080d17;
+  --color-blue: #1685ff;
+  --color-white: #ffffff;
+  --color-grey: #f7f9fc;
+
+  /* Semantic tokens */
+  --bg: var(--color-white);
+  --bg-alt: var(--color-grey);
+  --text: var(--color-black);
+  --text-muted: #5b6475;
+  --primary: var(--color-blue);
+  --border: #e3e8ef;
+
+  /* Typography (final font choice comes in UI-03) */
+  --font-main: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  /* Spacing and shape */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2.5rem;
+  --radius: 10px;
+  --container: 1200px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-main);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.5;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  width: min(100% - 2rem, var(--container));
+  margin-inline: auto;
+}
+
+.page {
+  padding-block: var(--space-4);
+}
+
+.site-header {
+  background: var(--color-black);
+  color: var(--color-white);
+}
+
+.site-header nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding-block: var(--space-2);
+}
+
+.site-header a:hover,
+.site-header a.active {
+  color: var(--primary);
+}

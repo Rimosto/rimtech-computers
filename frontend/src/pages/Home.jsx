@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import Button from '../components/common/Button';
+import Testimonials from '../components/home/Testimonials';
 import ProductCard from '../components/products/ProductCard';
 import { categories } from '../data/categories';
 import { products } from '../data/products';
@@ -42,7 +43,12 @@ export default function Home() {
           </p>
           <div className="hero-actions">
             <Button to="/shop">Shop Now</Button>
-            <Button href={whatsappLink('Hello RimTech, I would like to place an order.')} target="_blank" rel="noreferrer" variant="outline-light">
+            <Button
+              href={whatsappLink('Hello RimTech, I would like to place an order.')}
+              target="_blank"
+              rel="noreferrer"
+              variant="outline-light"
+            >
               Order on WhatsApp
             </Button>
           </div>
@@ -91,7 +97,11 @@ export default function Home() {
               <h2>Looking for something specific?</h2>
               <p>Tell us what you need and we will help you find the right computer or accessory.</p>
             </div>
-            <Button href={whatsappLink('Hello RimTech, I am looking for ')} target="_blank" rel="noreferrer">
+            <Button
+              href={whatsappLink('Hello RimTech, I am looking for ')}
+              target="_blank"
+              rel="noreferrer"
+            >
               Chat on WhatsApp
             </Button>
           </div>
@@ -114,6 +124,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* HOME-09: Customer feedback */}
+      <Testimonials />
     </>
   );
 }

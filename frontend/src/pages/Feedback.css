@@ -1,0 +1,75 @@
+.feedback-card {
+  max-width: 640px;
+  padding: var(--space-3);
+  background: var(--color-white);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.rating-input {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.star-option {
+  position: relative;
+  padding: 0.1rem;
+  color: #d3d9e3;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.15s, transform 0.15s;
+}
+
+.star-option:hover {
+  transform: scale(1.1);
+}
+
+.star-option.on {
+  color: #f5a623;
+}
+
+.star-option input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.star-option:has(input:focus-visible) {
+  outline: 3px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.star-option .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.rating-text {
+  margin-left: 0.5rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.consent {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.92rem;
+  cursor: pointer;
+}
+
+.consent input {
+  margin-top: 0.25rem;
+}

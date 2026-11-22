@@ -1,16 +1,17 @@
 import { Link } from 'react-router-dom';
 import { categories } from '../../data/categories';
+import { business, formatInternational } from '../../data/business';
 import { whatsappLink } from '../../utils/whatsapp';
 
-const number = import.meta.env.VITE_WHATSAPP_NUMBER;
-
 export default function Footer() {
+  const socials = Object.entries(business.social).filter(([, url]) => url);
+
   return (
     <footer className="site-footer">
       <div className="container footer-grid">
         <div>
-          <h3>RimTech Computers</h3>
-          <p>Laptops, desktops and computer accessories for customers across Kenya.</p>
+          <h3>{business.name}</h3>
+          <p>Laptops, desktops, phones and computer accessories for customers across Kenya.</p>
         </div>
 
         <div>
@@ -34,6 +35,9 @@ export default function Footer() {
               <Link to="/contact">Contact</Link>
             </li>
             <li>
+              <Link to="/feedback">Share your feedback</Link>
+            </li>
+            <li>
               <Link to="/cart">Cart</Link>
             </li>
           </ul>
@@ -41,16 +45,32 @@ export default function Footer() {
 
         <div>
           <h3>Order and enquiries</h3>
-          <p>
-            <a href={whatsappLink()} target="_blank" rel="noreferrer">
-              WhatsApp +{number}
-            </a>
-          </p>
+          <ul>
+            <li>
+              <a href={whatsappLink()} target="_blank" rel="noreferrer">
+                WhatsApp {formatInternational(business.whatsapp)}
+              </a>
+            </li>
+            {business.email && (
+              <li>
+                <a href={`mailto:${business.email}`}>{business.email}</a>
+              </li>
+            )}
+            {business.address && <li>{business.address}</li>}
+            {business.hours && <li>{business.hours}</li>}
+            {socials.map(([name, url]) => (
+              <li key={name}>
+                <a href={url} target="_blank" rel="noreferrer">
+                  {name.charAt(0).toUpperCase() + name.slice(1)}
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
 
       <div className="container footer-bottom">
-        &copy; {new Date().getFullYear()} RimTech Computers. All rights reserved.
+        &copy; {new Date().getFullYear()} {business.name}. All rights reserved.
       </div>
     </footer>
   );

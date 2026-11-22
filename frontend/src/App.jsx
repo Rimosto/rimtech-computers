@@ -8,6 +8,7 @@ import Checkout from './pages/Checkout';
 import OrderConfirmation from './pages/OrderConfirmation';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import Feedback from './pages/Feedback';
 import NotFound from './pages/NotFound';
 
 export default function App() {
@@ -22,6 +23,7 @@ export default function App() {
         <Route path="/order-confirmation" element={<OrderConfirmation />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/feedback" element={<Feedback />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

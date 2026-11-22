@@ -1,3 +1,7 @@
+.product-image {
+  position: relative;
+}
+
 .product-image-placeholder {
   display: flex;
   align-items: center;
@@ -11,4 +15,91 @@
 .product-image-placeholder svg {
   width: 38%;
   height: auto;
+}
+
+/* ---------- Availability badge ---------- */
+.badge {
+  position: absolute;
+  top: 0.6rem;
+  left: 0.6rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.3;
+  background: var(--color-white);
+  box-shadow: 0 1px 4px rgba(8, 13, 23, 0.15);
+}
+
+.badge::before {
+  content: '';
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 0.4rem;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.badge-in {
+  color: #12804a;
+}
+
+.badge-low {
+  color: #b45309;
+}
+
+.badge-out {
+  color: #c62d2d;
+}
+
+.badge-unknown {
+  color: #6b7587;
+}
+
+.product-card.is-out .product-image img,
+.product-card.is-out .product-image-placeholder {
+  opacity: 0.55;
+}
+
+/* ---------- Offer tag, old price, free gift ---------- */
+.offer-tag {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  padding: 0.25rem 0.6rem;
+  background: var(--primary);
+  color: var(--color-white);
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.product-price-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: var(--space-1);
+}
+
+.product-price-row .product-price {
+  margin: 0;
+}
+
+.price-old {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-decoration: line-through;
+}
+
+.gift-pill {
+  align-self: flex-start;
+  margin-bottom: var(--space-1);
+  padding: 0.2rem 0.6rem;
+  background: #fff4e0;
+  color: #9a5b00;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
 }

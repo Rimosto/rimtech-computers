@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import Button from '../common/Button';
 import { formatKsh } from '../../utils/format';
+import { availabilityInfo } from '../../utils/availability';
+import { getOffer } from '../../utils/offers';
 import { productEnquiryLink } from '../../utils/whatsapp';
 import './ProductCard.css';
 
@@ -18,28 +20,38 @@ function ImagePlaceholder() {
 export default function ProductCard({ product }) {
   const hasPrice = product.price !== null && product.price !== undefined;
   const image = product.images && product.images.length > 0 ? product.images[0] : null;
+  const stock = availabilityInfo(product.availability, product.quantity);
+  const offer = getOffer(product);
+  const hasGift = product.freeGifts && product.freeGifts.length > 0;
 
   return (
-    <article className="product-card">
+    <article className={stock.soldOut ? 'product-card is-out' : 'product-card'}>
       <Link to={`/product/${product.slug}`} className="product-image">
         {image ? <img src={image} alt={product.name} loading="lazy" /> : <ImagePlaceholder />}
+        <span className={`badge badge-${stock.tone}`}>{stock.label}</span>
+        {offer && <span className="offer-tag">-{offer.percent}%</span>}
       </Link>
       <div className="product-body">
         {product.brand && <span className="product-brand">{product.brand}</span>}
         <h3 className="product-name">
           <Link to={`/product/${product.slug}`}>{product.name}</Link>
         </h3>
-        <p className={hasPrice ? 'product-price' : 'product-price muted'}>
-          {formatKsh(product.price)}
-        </p>
+        <div className="product-price-row">
+          <p className={hasPrice ? 'product-price' : 'product-price muted'}>
+            {formatKsh(product.price)}
+          </p>
+          {offer && <span className="price-old">{formatKsh(offer.oldPrice)}</span>}
+        </div>
+        {hasGift && <span className="gift-pill">Free gift included</span>}
         <Button
           href={productEnquiryLink(product)}
           target="_blank"
           rel="noreferrer"
           size="sm"
+          variant={stock.soldOut ? 'dark' : 'primary'}
           block
         >
-          Enquire on WhatsApp
+          {stock.soldOut ? 'Ask when available' : 'Enquire on WhatsApp'}
         </Button>
       </div>
     </article>

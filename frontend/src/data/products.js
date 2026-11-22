@@ -1,16 +1,25 @@
 // TEMPORARY SAMPLE DATA.
-// Prices below are PLACEHOLDERS, not real RimTech prices. Replace this file with
-// the products API (MySQL) once the admin panel exists, and do not publish the
-// site publicly while these sample prices are still in use.
+// Prices, stock quantities, offers, gifts and many specs below are PLACEHOLDERS,
+// not confirmed RimTech data. Replace this file with the products API (MySQL)
+// once the admin panel exists, and do not publish the site publicly while these
+// sample values are still in use.
 //
 // condition:    'New' | 'Refurbished' | null
 // availability: 'in_stock' | 'out_of_stock' | null (null = not confirmed)
-// images:       array of URLs (Cloudinary URLs once uploads exist)
+// quantity:     units left, or null if not tracked
 // price:        number in KSh, or null (shows "Ask for price")
+// oldPrice:     the price before the offer (offer is active when oldPrice > price)
+// offerEndsAt:  'YYYY-MM-DD' or null (no end date)
+// images:       array of URLs (Cloudinary URLs once uploads exist)
+// highlights / included / freeGifts: arrays of short text lines
 
 const blank = {
   description: '',
   price: null,
+  oldPrice: null,
+  offerLabel: null,
+  offerEndsAt: null,
+  quantity: null,
   images: [],
   condition: null,
   availability: null,
@@ -18,9 +27,18 @@ const blank = {
   ram: null,
   storage: null,
   display: null,
+  resolution: null,
   graphics: null,
   os: null,
+  colour: null,
+  ports: null,
+  connectivity: null,
+  battery: null,
+  weight: null,
   warranty: null,
+  highlights: [],
+  included: [],
+  freeGifts: [],
   featured: false,
 };
 
@@ -34,6 +52,25 @@ export const products = [
     model: 'Precision Tower 3620',
     category: 'desktops',
     price: 28000,
+    availability: 'in_stock',
+    quantity: 4,
+    condition: 'Refurbished',
+    processor: 'Intel Core i5 (6th gen), 3.30 GHz',
+    ram: '16 GB DDR4',
+    storage: '512 GB SSD',
+    graphics: 'Intel HD Graphics (integrated)',
+    os: 'Windows 10 Pro',
+    colour: 'Black',
+    ports:
+      'Front: 2x USB 3.0, 2x USB 2.0, headphone jack, microphone jack. Rear: USB, Ethernet, DisplayPort, serial, PS/2',
+    warranty: '3 months',
+    highlights: [
+      'Workstation-class tower for office, design and CAD work',
+      'Front USB 3.0 ports and audio jacks',
+      'Windows installed and ready to use',
+    ],
+    included: ['Desktop tower', 'Power cable'],
+    freeGifts: ['Free HP wired mouse'],
     featured: true,
   },
   {
@@ -45,6 +82,32 @@ export const products = [
     model: 'Surface Pro 7',
     category: 'laptops',
     price: 42000,
+    oldPrice: 46000,
+    offerLabel: 'Weekend offer',
+    offerEndsAt: '2026-12-31',
+    availability: 'in_stock',
+    quantity: 6,
+    condition: 'Refurbished',
+    processor: 'Intel Core i5, 10th gen',
+    ram: '8 GB',
+    storage: '256 GB SSD',
+    display: '12.3-inch PixelSense touchscreen',
+    resolution: '2736 x 1824',
+    graphics: 'Intel Iris Plus (integrated)',
+    os: 'Windows 11',
+    colour: 'Platinum',
+    ports: 'USB-C, USB-A, Surface Connect, 3.5 mm headphone jack, microSDXC card reader',
+    connectivity: 'Wi-Fi 6, Bluetooth 5.0',
+    battery: 'Up to 10.5 hours',
+    weight: '775 g (tablet only)',
+    warranty: '3 months',
+    highlights: [
+      'Keyboard cover included',
+      'Touchscreen with built-in kickstand',
+      'Light enough to carry all day',
+    ],
+    included: ['Surface Pro 7 tablet', 'Keyboard cover', 'Charger'],
+    freeGifts: ['Free laptop sleeve'],
     featured: true,
   },
   {
@@ -56,6 +119,9 @@ export const products = [
     model: '',
     category: 'laptops',
     price: 48000,
+    availability: 'in_stock',
+    quantity: 5,
+    colour: 'Silver',
   },
   {
     ...blank,
@@ -66,6 +132,9 @@ export const products = [
     model: '',
     category: 'laptops',
     price: 70000,
+    availability: 'out_of_stock',
+    quantity: 0,
+    colour: 'Midnight blue',
   },
   {
     ...blank,
@@ -76,6 +145,23 @@ export const products = [
     model: 'Galaxy S22 Ultra',
     category: 'phones',
     price: 65000,
+    availability: 'in_stock',
+    quantity: 3,
+    condition: 'Refurbished',
+    processor: 'Snapdragon 8 Gen 1 or Exynos 2200 (varies by region)',
+    ram: '8 GB',
+    storage: '256 GB',
+    display: '6.8-inch Dynamic AMOLED 2X, 120 Hz',
+    resolution: '3088 x 1440 (QHD+)',
+    os: 'Android with One UI',
+    colour: 'Burgundy, Green, Phantom Black',
+    ports: 'USB-C',
+    connectivity: '5G, Wi-Fi 6E, Bluetooth 5.2, NFC',
+    battery: '5,000 mAh',
+    warranty: '3 months',
+    highlights: ['Built-in S Pen', 'Quad rear camera with 108 MP main sensor'],
+    included: ['Phone', 'Charging cable'],
+    freeGifts: ['Free screen protector and case'],
     featured: true,
   },
   {
@@ -87,6 +173,14 @@ export const products = [
     model: 'Galaxy S23 Ultra',
     category: 'phones',
     price: 85000,
+    availability: 'in_stock',
+    quantity: 6,
+    condition: 'Refurbished',
+    display: '6.8-inch Dynamic AMOLED 2X, 120 Hz',
+    resolution: '3088 x 1440 (QHD+)',
+    colour: 'Lavender',
+    ports: 'USB-C',
+    highlights: ['Built-in S Pen', '200 MP main camera'],
   },
   {
     ...blank,
@@ -97,6 +191,11 @@ export const products = [
     model: '',
     category: 'monitors',
     price: 32000,
+    availability: 'in_stock',
+    quantity: 2,
+    display: 'Curved display',
+    colour: 'Black',
+    ports: 'HDMI, USB-C, USB hub',
   },
   {
     ...blank,
@@ -107,6 +206,11 @@ export const products = [
     model: '',
     category: 'monitors',
     price: 45000,
+    availability: 'in_stock',
+    quantity: 1,
+    display: 'Curved display',
+    colour: 'Silver and white',
+    ports: '2x HDMI, USB',
   },
   {
     ...blank,
@@ -117,6 +221,10 @@ export const products = [
     model: '',
     category: 'monitors',
     price: 9500,
+    availability: 'in_stock',
+    quantity: 12,
+    colour: 'Black',
+    highlights: ['Adjustable stand'],
   },
   {
     ...blank,
@@ -127,6 +235,20 @@ export const products = [
     model: 'Cloud II',
     category: 'accessories',
     price: 8500,
+    oldPrice: 9500,
+    offerLabel: 'Gamer deal',
+    availability: 'in_stock',
+    quantity: 8,
+    condition: 'New',
+    colour: 'Red and black',
+    connectivity: 'Wired (3.5 mm, with USB audio control box)',
+    warranty: '2 years',
+    highlights: [
+      'Memory foam ear cushions',
+      'Detachable microphone',
+      'Virtual 7.1 surround sound through the USB control box',
+    ],
+    included: ['Headset', 'Detachable microphone', 'USB audio control box', 'Carry pouch'],
     featured: true,
   },
   {
@@ -138,6 +260,10 @@ export const products = [
     model: '',
     category: 'accessories',
     price: 1500,
+    availability: 'in_stock',
+    quantity: 15,
+    colour: 'Silver',
+    highlights: ['Foldable and portable', 'Adjustable height'],
   },
   {
     ...blank,
@@ -148,6 +274,13 @@ export const products = [
     model: 'Wired Desktop 320M',
     category: 'keyboards-mice',
     price: 650,
+    availability: 'in_stock',
+    quantity: 24,
+    condition: 'New',
+    colour: 'Black',
+    connectivity: 'Wired',
+    ports: 'USB-A',
+    highlights: ['3-button mouse with scroll wheel', 'Optical sensor', 'Ambidextrous design'],
     featured: true,
   },
   {
@@ -159,5 +292,8 @@ export const products = [
     model: 'Standard',
     category: 'software',
     price: 2800,
+    condition: 'New',
+    os: 'Windows, macOS, Android, iOS',
+    highlights: ['Protects up to 3 devices', '1-year subscription'],
   },
 ];

@@ -2,11 +2,13 @@ import { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Button from '../components/common/Button';
 import ShareButton from '../components/common/ShareButton';
+import AddToCartButton from '../components/cart/AddToCartButton';
 import ImageGallery from '../components/products/ImageGallery';
 import ProductCard from '../components/products/ProductCard';
 import { categories } from '../data/categories';
 import { products } from '../data/products';
 import { availabilityInfo } from '../utils/availability';
+import { canAddToCart } from '../utils/cart';
 import { formatKsh } from '../utils/format';
 import { getOffer } from '../utils/offers';
 import { productEnquiryLink } from '../utils/whatsapp';
@@ -45,10 +47,15 @@ export default function ProductDetails() {
   const category = categories.find((c) => c.slug === product.category);
   const stock = availabilityInfo(product.availability, product.quantity);
   const offer = getOffer(product);
+  const canAdd = canAddToCart(product);
   const hasPrice = product.price !== null && product.price !== undefined;
   const gifts = product.freeGifts || [];
   const highlights = product.highlights || [];
   const included = product.included || [];
+
+  let enquiryVariant = 'primary';
+  if (canAdd) enquiryVariant = 'outline';
+  else if (stock.soldOut) enquiryVariant = 'dark';
 
   const quickSpecs = [
     product.processor,
@@ -159,11 +166,12 @@ export default function ProductDetails() {
             )}
 
             <div className="pdp-actions">
+              {canAdd && <AddToCartButton product={product} />}
               <Button
                 href={productEnquiryLink(product)}
                 target="_blank"
                 rel="noreferrer"
-                variant={stock.soldOut ? 'dark' : 'primary'}
+                variant={enquiryVariant}
               >
                 {stock.soldOut ? 'Ask when available' : 'Enquire on WhatsApp'}
               </Button>

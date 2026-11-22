@@ -1,10 +1,13 @@
 import { Link } from 'react-router-dom';
 import Button from '../common/Button';
+import AddToCartButton from '../cart/AddToCartButton';
 import { formatKsh } from '../../utils/format';
 import { availabilityInfo } from '../../utils/availability';
+import { canAddToCart } from '../../utils/cart';
 import { getOffer } from '../../utils/offers';
 import { productEnquiryLink } from '../../utils/whatsapp';
 import './ProductCard.css';
+import '../cart/CartBits.css';
 
 function ImagePlaceholder() {
   return (
@@ -23,6 +26,11 @@ export default function ProductCard({ product }) {
   const stock = availabilityInfo(product.availability, product.quantity);
   const offer = getOffer(product);
   const hasGift = product.freeGifts && product.freeGifts.length > 0;
+  const canAdd = canAddToCart(product);
+
+  let enquiryVariant = 'primary';
+  if (canAdd) enquiryVariant = 'outline';
+  else if (stock.soldOut) enquiryVariant = 'dark';
 
   return (
     <article className={stock.soldOut ? 'product-card is-out' : 'product-card'}>
@@ -43,16 +51,20 @@ export default function ProductCard({ product }) {
           {offer && <span className="price-old">{formatKsh(offer.oldPrice)}</span>}
         </div>
         {hasGift && <span className="gift-pill">Free gift included</span>}
-        <Button
-          href={productEnquiryLink(product)}
-          target="_blank"
-          rel="noreferrer"
-          size="sm"
-          variant={stock.soldOut ? 'dark' : 'primary'}
-          block
-        >
-          {stock.soldOut ? 'Ask when available' : 'Enquire on WhatsApp'}
-        </Button>
+
+        <div className="card-actions">
+          {canAdd && <AddToCartButton product={product} size="sm" block />}
+          <Button
+            href={productEnquiryLink(product)}
+            target="_blank"
+            rel="noreferrer"
+            size="sm"
+            variant={enquiryVariant}
+            block
+          >
+            {stock.soldOut ? 'Ask when available' : 'Enquire on WhatsApp'}
+          </Button>
+        </div>
       </div>
     </article>
   );

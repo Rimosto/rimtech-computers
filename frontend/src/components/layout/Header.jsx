@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import Logo from '../common/Logo';
 import Button from '../common/Button';
+import { useCart } from '../../hooks/useCart';
+import './Header.css';
 
 const links = [
   { to: '/', label: 'Home', end: true },
@@ -12,7 +14,9 @@ const links = [
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const { itemCount } = useCart();
   const close = () => setOpen(false);
+  const cartLabel = `Cart, ${itemCount} ${itemCount === 1 ? 'item' : 'items'}`;
 
   return (
     <header className="site-header">
@@ -25,8 +29,9 @@ export default function Header() {
               {l.label}
             </NavLink>
           ))}
-          <Button to="/cart" size="sm">
+          <Button to="/cart" size="sm" aria-label={cartLabel}>
             Cart
+            {itemCount > 0 && <span className="cart-count">{itemCount}</span>}
           </Button>
         </nav>
 
@@ -50,8 +55,9 @@ export default function Header() {
               {l.label}
             </NavLink>
           ))}
-          <Button to="/cart" onClick={close}>
+          <Button to="/cart" onClick={close} aria-label={cartLabel}>
             View cart
+            {itemCount > 0 && <span className="cart-count">{itemCount}</span>}
           </Button>
         </nav>
       )}

@@ -1,0 +1,16 @@
+.card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+
+.product-body .card-actions .btn {
+  margin-top: 0;
+}
+
+/* Keep prices on one line in order summaries and cart lines */
+.summary-items li span:last-child,
+.line-total {
+  white-space: nowrap;
+}
